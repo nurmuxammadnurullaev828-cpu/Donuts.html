@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donuts & Coffee Bukhara</title>
+  
+  <!-- Подключение Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Подключение Font Awesome (Иконки) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* Кастомные стили */
+    body {
+      background-color: #18181c;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .brand-logo {
+      width: 45px;
+      height: 45px;
+      object-fit: cover;
+    }
+
+    .card {
+      background-color: #24242c;
+      border: 1px solid #32323d;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 107, 107, 0.2);
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .btn-pink {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+    }
+
+    .btn-pink:hover, .btn-pink:focus {
+      background-color: #ff5252;
+      color: white;
+    }
+
+    .btn-outline-pink {
+      color: #a0a5b5;
+      border-color: #32323d;
+      background-color: #24242c;
+    }
+
+    .btn-outline-pink:hover, .btn-outline-pink.active {
+      background-color: #ff6b6b;
+      border-color: #ff6b6b;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Навбар -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhHl-wGTqZGDfCa3-nG3mGBnveKpNNsTxAs01BXYI79g&s" alt="Logo" class="rounded-circle brand-logo">
+        <span>Donuts & Coffee Bukhara</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto gap-lg-2 mt-3 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active rounded-3 px-3" href="#"><i class="fa-solid fa-house me-1"></i> Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link rounded-3 px-3" href="#menu"><i class="fa-solid fa-mug-hot me-1"></i> Меню</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link rounded-3 px-3" href="#about"><i class="fa-solid fa-percent me-1"></i> Акции</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link rounded-3 px-3" href="#contacts"><i class="fa-solid fa-location-dot me-1"></i> Контакты</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 2. Главный баннер (Hero Section) -->
+  <div class="container-fluid bg-dark text-white py-5 shadow-lg" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=2000') no-repeat center; background-size: cover; min-height: 75vh;">
+    <div class="container d-flex flex-column justify-content-center h-100 py-5 text-center">
+      <div class="row justify-content-center">
+        <div class="col-md-9 col-lg-7">
+          <h1 class="display-4 fw-bold mb-3 text-uppercase" style="color: #ff6b6b;">Тот самый вкус, <br>который ты искал</h1>
+          <p class="lead text-secondary mb-4 fs-4">Свежайшие пончики и кофе ручной обжарки прямо в сердце Бухары.</p>
+          <a href="#menu" class="btn btn-pink btn-lg rounded-pill px-5 py-3 fw-bold fs-5 text-uppercase">Хочу пончик!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Основное Меню -->
+  <main class="container my-5" id="menu">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-uppercase">Наше Меню</h2>
+      <p class="text-secondary">Свежие пончики и ароматный кофе каждый день</p>
+    </div>
+
+    <!-- Кнопки Фильтров -->
+    <div class="d-flex justify-content-center flex-wrap gap-2 mb-5">
+      <button class="btn btn-outline-pink rounded-pill px-4 active" onclick="filterMenu('all', this)">Всё меню</button>
+      <button class="btn btn-outline-pink rounded-pill px-4" onclick="filterMenu('donuts', this)"><i class="fa-solid fa-donut me-1"></i> Пончики</button>
+      <button class="btn btn-outline-pink rounded-pill px-4" onclick="filterMenu('coffee', this)"><i class="fa-solid fa-mug-hot me-1"></i> Кофе</button>
+    </div>
+
+    <!-- Сетка товаров -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      
+      <!-- ПОНЧИКИ -->
+      <div class="col menu-item donuts">
+        <div class="card h-100 rounded-4 text-white">
+          <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=500" class="card-img-top rounded-top-4" alt="Шоколадный пончик">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold">Шоколадный Пончик</h5>
+            <p class="card-text text-secondary small flex-grow-1">Покрыт тёмным бельгийским шоколадом и крошкой.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <span class="fw-bold text-danger fs-5">15 000 сум</span>
+              <button class="btn btn-pink rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col menu-item donuts">
+        <div class="card h-100 rounded-4 text-white">
+          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=500" class="card-img-top rounded-top-4" alt="Клубничный пончик">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold">Клубничный Пончик</h5>
+            <p class="card-text text-secondary small flex-grow-1">С клубничной глазурью и яркой посыпкой.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <span class="fw-bold text-danger fs-5">15 000 сум</span>
+              <button class="btn btn-pink rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col menu-item donuts">
+        <div class="card h-100 rounded-4 text-white">
+          <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=500" class="card-img-top rounded-top-4" alt="Карамельный пончик">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold">Карамельный Пончик</h5>
+            <p class="card-text text-secondary small flex-grow-1">С солёной карамелью и обжаренным арахисом.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <span class="fw-bold text-danger fs-5">16 000 сум</span>
+              <button class="btn btn-pink rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col menu-item donuts">
+        <div class="card h-100 rounded-4 text-white">
+          <img src="https://images.unsplash.com/photo-1551106652-a5bcf4b29ab6?w=500" class="card-img-top rounded-top-4" alt="Фисташковый пончик">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold">Фисташковый Пончик</h5>
+            <p class="card-text text-secondary small flex-grow-1">С фисташковым кремом и нежной фисташковой крошкой.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <span class="fw-bold text-danger fs-5">18 000 сум</span>
+              <button class="btn btn-pink rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- КОФЕ -->
+      <div class="col menu-item coffee">
+        <div class="card h-100 rounded-4 text-white">
+          <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=500" class="card-img-top rounded-top-4" alt="Эспрессо">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title fw-bold mb-0">Эспрессо</h5>
+              <span class="badge bg-secondary">Крепкий</span>
+            </div>
+            <p class="card-text text-secondary small flex-grow-1">Классический плотный кофе с насыщенным ароматом.</p>
+            <div class="btn-group w-100 my-3" role="group">
+              <input type="radio" class="btn-check" name="size-espresso" id="esp-30" checked>
+              <label class="btn btn-outline-secondary btn-sm" for="esp-30">30 мл</label>
+              <input type="radio" class="btn-check" name="size-espresso" id="esp-60">
+              <label class="btn btn-outline-secondary btn-sm" for="esp-60">60 мл</label>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-danger fs-5">12 000 сум</span>
+              <button class="btn btn-pink rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col menu-item coffee">
+        <div class="card h-100 rounded-4 text-white">
+          <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500" class="card-img-top rounded-top-4" alt="Капучино">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title fw-bold mb-0">Капучино</h5>
+              <span class="badge bg-warning text-dark">Хит</span>
+            </div>
+            <p class="card-text text-secondary small flex-grow-1">Баланс эспрессо и взбитого горячего молока.</p>
+            <div class="btn-group w-100 my-3" role="group">
+              <input type="radio" class="btn-check" name="size-cap" id="cap-m" checked>
+              <label class="btn btn-outline-secondary btn-sm" for="cap-m">250 мл</label>
+              <input type="radio" class="btn-check" name="size-cap" id="cap-l">
+              <label class="btn btn-outline-secondary btn-sm" for="cap-l">350 мл</label>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-danger fs-5">20 000 сум</span>
+              <button class="btn btn-pink rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col menu-item coffee">
+        <div class="card h-100 rounded-4 text-white">
+          <img src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=500" class="card-img-top rounded-top-4" alt="Латте">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title fw-bold mb-0">Латте</h5>
+              <span class="badge bg-info text-dark">Нежный</span>
+            </div>
+            <p class="card-text text-secondary small flex-grow-1">Мягкий молочно-кофейный напиток с пышной пенкой.</p>
+            <div class="btn-group w-100 my-3" role="group">
+              <input type="radio" class="btn-check" name="size-latte" id="lat-m" checked>
+              <label class="btn btn-outline-secondary btn-sm" for="lat-m">300 мл</label>
+              <input type="radio" class="btn-check" name="size-latte" id="lat-l">
+              <label class="btn btn-outline-secondary btn-sm" for="lat-l">400 мл</label>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-danger fs-5">22 000 сум</span>
+              <button class="btn btn-pink rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col menu-item coffee">
+        <div class="card h-100 rounded-4 text-white">
+          <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500" class="card-img-top rounded-top-4" alt="Айс Латте">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title fw-bold mb-0">Айс Латте</h5>
+              <span class="badge bg-primary">Холодный</span>
+            </div>
+            <p class="card-text text-secondary small flex-grow-1">Освежающий холодный кофе со льдом и сиропом.</p>
+            <div class="btn-group w-100 my-3" role="group">
+              <input type="radio" class="btn-check" name="size-ice" id="ice-m" checked>
+              <label class="btn btn-outline-secondary btn-sm" for="ice-m">350 мл</label>
+              <input type="radio" class="btn-check" name="size-ice" id="ice-l">
+              <label class="btn btn-outline-secondary btn-sm" for="ice-l">450 мл</label>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-auto">
+              <span class="fw-bold text-danger fs-5">24 000 сум</span>
+              <button class="btn btn-pink rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 4. Подвал (Футер) -->
+  <footer class="bg-dark text-secondary py-4 border-top border-secondary mt-5" id="contacts">
+    <div class="container text-center text-md-start">
+      <div class="row gy-3">
+        <div class="col-md-6">
+          <h5 class="text-white fw-bold">Donuts & Coffee Bukhara</h5>
+          <p class="small mb-0">Самые вкусные пончики и свежеобжаренный кофе в городе.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="mb-1"><i class="fa-solid fa-location-dot me-2"></i>г. Бухара, ул. Центральная, 12</p>
+          <p class="mb-0"><i class="fa-solid fa-phone me-2"></i>+998 (90) 123-45-67</p>
+        </div>
+      </div>
+      <hr class="my-3 border-secondary">
+      <div class="text-center small">
+        &copy; Donuts & Coffee Bukhara. Все права защищены.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Скрипт для работы фильтрации карточек -->
+  <script>
+    function filterMenu(category, btn) {
+      document.querySelectorAll('.btn-outline-pink').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const items = document.querySelectorAll('.menu-item');
+      items.forEach(item => {
+        if (category === 'all' || item.classList.contains(category)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+  <!-- Подключение Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
